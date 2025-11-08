@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Conversation Examples</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #F9F7FF;
+      margin: 0;
+      display: flex;
+      height: 100vh;
+      color: #333;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+       background: linear-gradient(180deg, #4A1780, #7928ca);
+      color: white;
+      padding: 30px 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    .sidebar h2 {
+      font-size: 22px;
+      margin-bottom: 25px;
+    }
+
+    .category-btn {
+      width: 100%;
+      text-align: left;
+      padding: 12px 15px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category-btn:hover,
+    .category-btn.active {
+      background: white;
+      color: #4A1780;
+    }
+
+    /* Main Content */
+    .content {
+      flex: 1;
+      padding: 40px;
+      overflow-y: auto;
+    }
+
+    .content h1 {
+      color: #4A1780;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .intro {
+      background: #EDE2F8;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      border-left: 5px solid #B18BE0;
+    }
+
+    .example {
+      background: white;
+      border: 1px solid #E1D3F3;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 15px 0;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .example h3 {
+      color: #9A6ED0;
+      margin-bottom: 10px;
+    }
+
+    .example p {
+      margin: 6px 0;
+      font-size: 15px;
+    }
+
+    .example strong {
+      color: #4A1780;
+    }
+
+    .home-link {
+      display: inline-block;
+      padding: 10px 18px;
+      background: #9A6ED0;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+      margin-top: 25px;
+    }
+
+    .home-link:hover {
+      background: #B08BE1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        border-radius: 0;
+      }
+
+      .category-btn {
+        text-align: center;
+        font-size: 14px;
+        margin: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Examples</h2>
+    <button class="category-btn active" data-cat="daily">Daily Life</button>
+    <button class="category-btn" data-cat="office">Office</button>
+    <button class="category-btn" data-cat="restaurant">Restaurant</button>
+    <button class="category-btn" data-cat="travel">Travel</button>
+    <button class="category-btn" data-cat="medical">Medical</button>
+  </div>
+
+  <div class="content">
+    <h1>View Conversation Examples</h1>
+
+    <div class="intro">
+      <p>Explore real-world English conversations from various situations. Learn natural phrases, tone, and expressions to communicate fluently anywhere you go.</p>
+    </div>
+
+    <div id="examples"></div>
+
+    <a th:href="@{/main}" class="home-link">⬅ Back to Home</a>
+  </div>
+
+  <script>
+    const examplesContainer = document.getElementById("examples");
+    const buttons = document.querySelectorAll(".category-btn");
+
+    const examples = {
+      daily: [
+        {
+          title: "🏠 Talking About Weather",
+          lines: [
+            { person: "A", text: "It’s really hot today, isn’t it?" },
+            { person: "B", text: "Yes, I wish it would rain soon." },
+          ]
+        },
+        {
+          title: "📞 Phone Call with a Friend",
+          lines: [
+            { person: "Friend", text: "Hey, are you free this weekend?" },
+            { person: "You", text: "Yes! Let’s meet for lunch on Sunday." },
+          ]
+        }
+      ],
+      office: [
+        {
+          title: "💼 Meeting with Manager",
+          lines: [
+            { person: "Manager", text: "Can you update me on the project progress?" },
+            { person: "You", text: "Sure! We’ve completed 80% of the tasks." },
+          ]
+        },
+        {
+          title: "👩‍💻 Small Talk with Colleague",
+          lines: [
+            { person: "You", text: "How was your weekend?" },
+            { person: "Colleague", text: "Pretty relaxing, I watched some movies!" },
+          ]
+        }
+      ],
+      restaurant: [
+        {
+          title: "🍽️ Ordering Food",
+          lines: [
+            { person: "Waiter", text: "What would you like to order?" },
+            { person: "You", text: "I’ll have a grilled sandwich and lemonade, please." },
+          ]
+        },
+        {
+          title: "💵 Asking for the Bill",
+          lines: [
+            { person: "You", text: "Excuse me, can I get the check, please?" },
+            { person: "Waiter", text: "Sure, I’ll bring it right away." },
+          ]
+        }
+      ],
+      travel: [
+        {
+          title: "🚌 At the Bus Station",
+          lines: [
+            { person: "You", text: "What time does the next bus to Delhi leave?" },
+            { person: "Agent", text: "At 6:30 PM, from platform 3." },
+          ]
+        },
+        {
+          title: "🏨 Hotel Check-in",
+          lines: [
+            { person: "Receptionist", text: "Do you have a reservation?" },
+            { person: "You", text: "Yes, under the name Krishna Murari." },
+          ]
+        }
+      ],
+      medical: [
+        {
+          title: "🏥 At the Clinic",
+          lines: [
+            { person: "Doctor", text: "What seems to be the problem?" },
+            { person: "You", text: "I’ve been having a sore throat for three days." },
+          ]
+        },
+        {
+          title: "💊 At the Pharmacy",
+          lines: [
+            { person: "Pharmacist", text: "Here’s your medicine, take it twice a day." },
+            { person: "You", text: "Thank you! Should I take it before or after meals?" },
+          ]
+        }
+      ]
+    };
+
+    function displayExamples(category) {
+      examplesContainer.innerHTML = "";
+      examples[category].forEach(e => {
+        const div = document.createElement("div");
+        div.className = "example";
+        div.innerHTML = `<h3>${e.title}</h3>` +
+          e.lines.map(l => `<p><strong>${l.person}:</strong> ${l.text}</p>`).join("");
+        examplesContainer.appendChild(div);
+      });
+    }
+
+    displayExamples("daily");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelector(".category-btn.active").classList.remove("active");
+        btn.classList.add("active");
+        displayExamples(btn.dataset.cat);
+      });
+    });
+  </script>
+</body>
+</html>

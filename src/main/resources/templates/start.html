@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English for Professionals | FluentNest</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f3f7f9 0%, #eaf6fc 100%);
+      color: #222;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+     background: linear-gradient(180deg, #4A1780, #7928ca);
+      color: white;
+      text-align: center;
+      padding: 25px 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.9rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 40px 50px;
+      animation: fadeIn 0.8s ease;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 5px;
+      background: #7928ca;
+      width: 0%;
+      transition: width 0.5s ease;
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+    }
+
+    h2 {
+      color: #4A1780;
+      margin-top: 0;
+    }
+
+    p, li {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      text-align: justify;
+    }
+
+    ul {
+      margin: 10px 0 25px 25px;
+    }
+
+    .highlight {
+      background: #EDE3F8;
+      border-left: 5px solid  #4A1780;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin: 25px 0;
+    }
+
+    .dialogue {
+      background: #EDE3F8;
+      border-left: 4px solid  #4A1780;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .btn {
+     background: linear-gradient(180deg, #4A1780, #7928ca);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: #7928ca;
+      transform: translateY(-2px);
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+    }
+
+    #startScreen {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    #startScreen h2 {
+      font-size: 1.8rem;
+      color: #7928ca;
+    }
+
+    #startBtn {
+      font-size: 1.1rem;
+      padding: 15px 35px;
+      margin-top: 25px;
+      background: linear-gradient(180deg, #4A1780, #7928ca);
+      border-radius: 10px;
+    }
+
+    #startBtn:hover {
+      background: #7928ca;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      color: #555;
+      font-size: 0.9rem;
+      background: #f8fbfc;
+      margin-top: 50px;
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.4s ease;
+    }
+
+    .show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .lesson-count {
+      color: #555;
+      font-weight: 500;
+      text-align: right;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><span style="background: linear-gradient(to right, #ff0080, rgb(128, 0, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;">FluentNest</span>: English for Professionals</h1>
+  </header>
+
+  <!-- Start Screen -->
+  <div class="container" id="startScreen">
+    <h2>Ready to Level Up Your Professional English?</h2>
+    <p>Learn to communicate effectively and confidently in meetings, interviews, and business calls.  
+    Improve your etiquette and fluency, one step at a time!</p>
+    <button id="startBtn" class="btn">Start Lesson</button>
+  </div>
+
+  <!-- Lesson Container -->
+  <div class="container fade" id="lessonContainer" style="display:none;">
+    <div class="progress" id="progressBar"></div>
+    <div class="lesson-count" id="lessonCount"></div>
+    <h2 id="lessonTitle"></h2>
+    <div id="lessonContent"></div>
+
+    <div class="nav-buttons">
+      <button class="btn" id="prevLesson">⬅ Previous</button>
+      <button class="btn" id="nextLesson">Next ➡</button>
+    </div>
+  </div>
+
+  <footer>© 2025 FluentNest — Learn, Grow, Communicate Better.</footer>
+
+  <script>
+    const lessons = [
+      {
+        title: "Office Etiquette",
+        content: `
+          <div class="highlight">
+            <p>Good manners and clear communication are key to making a professional impression.  
+            Office etiquette includes respecting others’ space, tone, and time.</p>
+          </div>
+          <ul>
+            <li>Greet colleagues politely with a smile.</li>
+            <li>Be punctual for meetings.</li>
+            <li>Keep your workspace clean and organized.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Client Communication",
+        content: `
+          <p>Building trust with clients begins with professional tone, clarity, and confidence. Always confirm details and appreciate their time.</p>
+          <div class="dialogue">
+            <p><strong>You:</strong> "Good morning, Ms. Taylor. I’d like to confirm our delivery timeline for next week."</p>
+            <p><strong>Client:</strong> "Thanks! I appreciate the update."</p>
+          </div>
+        `
+      },
+      {
+        title: "Handling Feedback",
+        content: `
+          <p>Feedback is an opportunity for growth. Learn to receive it positively and give it constructively.</p>
+          <div class="highlight">
+            <ul>
+              <li>Start with appreciation.</li>
+              <li>Focus on solutions, not blame.</li>
+              <li>Thank the person for their input.</li>
+            </ul>
+          </div>
+        `
+      }
+    ];
+
+    let currentLesson = 0;
+    const startScreen = document.getElementById("startScreen");
+    const lessonContainer = document.getElementById("lessonContainer");
+    const lessonTitle = document.getElementById("lessonTitle");
+    const lessonContent = document.getElementById("lessonContent");
+    const nextBtn = document.getElementById("nextLesson");
+    const prevBtn = document.getElementById("prevLesson");
+    const progressBar = document.getElementById("progressBar");
+    const lessonCount = document.getElementById("lessonCount");
+
+    function loadLesson(index) {
+      const lesson = lessons[index];
+      lessonTitle.textContent = lesson.title;
+      lessonContent.innerHTML = lesson.content;
+      lessonContainer.classList.remove("show");
+      setTimeout(() => lessonContainer.classList.add("show"), 200);
+
+      // Update progress bar and count
+      progressBar.style.width = ((index + 1) / lessons.length) * 100 + "%";
+      lessonCount.textContent = `Lesson ${index + 1} of ${lessons.length}`;
+    }
+
+    document.getElementById("startBtn").addEventListener("click", () => {
+      startScreen.style.display = "none";
+      lessonContainer.style.display = "block";
+      loadLesson(currentLesson);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentLesson < lessons.length - 1) {
+        currentLesson++;
+        loadLesson(currentLesson);
+      } else {
+        alert("🎉 You’ve completed all lessons! Great job!");
+      }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (currentLesson > 0) {
+        currentLesson--;
+        loadLesson(currentLesson);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practice Words | FluentNest</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #EDE3F8;
+      color: #2E1065;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 60px auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 30px 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4A1780;
+    }
+
+    .word-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .word-item {
+      background: #F6F0FB;
+      border-left: 5px solid #8E4DD8;
+      padding: 10px 15px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn {
+      background: #8E4DD8;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #4A1780;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #555;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🗣️ Practice Words</h1>
+    <div class="word-list">
+      <div class="word-item"><span>Professional</span> <button class="btn" onclick="speak('Professional')">Play</button></div>
+      <div class="word-item"><span>Communication</span> <button class="btn" onclick="speak('Communication')">Play</button></div>
+      <div class="word-item"><span>Interview</span> <button class="btn" onclick="speak('Interview')">Play</button></div>
+      <div class="word-item"><span>Presentation</span> <button class="btn" onclick="speak('Presentation')">Play</button></div>
+      <div class="word-item"><span>Pronunciation</span> <button class="btn" onclick="speak('Pronunciation')">Play</button></div>
+    </div>
+  </div>
+
+  <footer>© 2025 FluentNest — Practice Words</footer>
+
+  <script>
+    function speak(word) {
+      const utter = new SpeechSynthesisUtterance(word);
+      utter.lang = 'en-US';
+      speechSynthesis.speak(utter);
+    }
+  </script>
+</body>
+</html>

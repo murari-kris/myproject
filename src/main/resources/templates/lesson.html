@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar Lessons | FluentNest</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: #fff;
+      color: #333;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background: linear-gradient(180deg, #4A1780, #7928ca);
+      color: white;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+      letter-spacing: 1px;
+    }
+
+    .nav-links a {
+      display: block;
+      text-decoration: none;
+      color: white;
+      background: rgba(255,255,255,0.1);
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-weight: 500;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .sidebar-footer {
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      transition: margin-left 0.3s ease;
+    }
+
+    header {
+      background: linear-gradient(to right, #7928ca, #4A1780);
+      color: white;
+      text-align: center;
+      padding: 35px 20px;
+      font-size: 36px;
+      font-weight: 700;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .intro h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #4A1780;
+    }
+
+    .intro p {
+      color: #555;
+      font-size: 17px;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .lessons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 25px;
+      transition: 0.3s;
+      border-top: 5px solid #7928ca;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .card h3 {
+      color: #4A1780;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .example {
+      background: #F3E9FF;
+      border-left: 4px solid #C59AF3;
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-top: 8px;
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .btn {
+      text-decoration: none;
+      background: linear-gradient(to right, #4A1780, #7928ca);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 8px;
+      margin: 10px;
+      display: inline-block;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 20px;
+      color: #555;
+      font-size: 15px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .sidebar {
+        position: fixed;
+        left: -270px;
+        top: 0;
+        height: 100%;
+        z-index: 999;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      .main-content {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="menu-toggle"></button>
+
+  <aside class="sidebar" id="sidebar">
+    <div>
+      <h2><span style="background: linear-gradient(to right, #ff0080, rgb(128, 0, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;">FluentNest</span></h2>
+      <div class="nav-links">
+        <a class="active" data-section="beginner">Beginner Lessons</a>
+        <a data-section="intermediate">Intermediate Lessons</a>
+        <a data-section="advanced">Advanced Lessons</a>
+        <a data-section="quizzes">Quizzes & Tests</a>
+      </div>
+    </div>
+    <div class="sidebar-footer">
+      © 2025 FluentNest
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header>Grammar Lessons</header>
+
+    <div class="intro">
+      <h2 id="intro-title">Enhance Your English Grammar Skills</h2>
+      <p id="intro-desc">Master English grammar step-by-step through interactive lessons, real-life examples, and practical applications to strengthen your communication skills.</p>
+    </div>
+
+    <div class="lessons" id="lesson-container">
+      <!-- JS will load cards here -->
+    </div>
+
+    <div class="btn-container">
+      <a href="/lesson" class="btn">Start Lesson</a>
+      <a href="/quiz" class="btn">Take Quiz</a>
+      <a href="/main" class="btn" style="background:linear-gradient(to right, #4EB5A9, #A4DDD6); color:#000;">Back to Main</a>
+    </div>
+
+    <footer>© 2025 FluentNest | Learn English with Confidence</footer>
+  </main>
+
+  <script>
+    // Sidebar toggle (for mobile)
+    const menuBtn = document.querySelector('.menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    menuBtn.addEventListener('click', () => sidebar.classList.toggle('active'));
+
+    // Lesson data
+    const lessonsData = {
+      beginner: [
+        { title: "Nouns and Pronouns", text: "Learn the basics of identifying people, places, and things.", example: "Example: John is a good boy. He loves football." },
+        { title: "Simple Tenses", text: "Understand how to express actions in the past, present, and future.", example: "Example: I eat breakfast at 8 a.m." }
+      ],
+      intermediate: [
+        { title: "Prepositions", text: "Master words that show relationships between nouns and other words.", example: "Example: The book is on the table." },
+        { title: "Conjunctions", text: "Learn how to join sentences and ideas effectively.", example: "Example: I like coffee and tea." }
+      ],
+      advanced: [
+        { title: "Conditionals", text: "Discuss possibilities and hypothetical situations with ease.", example: "Example: If I had studied harder, I would have passed." },
+        { title: "Clauses & Modifiers", text: "Enhance sentence clarity and complexity.", example: "Example: The man who lives next door is a doctor." }
+      ],
+      quizzes: [
+        { title: "Grammar Test 1", text: "Test your understanding of basic grammar rules.", example: "Sample Question: Choose the correct form — 'He ___ playing.'" },
+        { title: "Advanced Challenge", text: "Check your command of tenses, voices, and conditionals.", example: "Sample Question: Convert: ‘They built a house’ to passive voice." }
+      ]
+    };
+
+    // Update content based on sidebar selection
+    const lessonContainer = document.getElementById('lesson-container');
+    const introTitle = document.getElementById('intro-title');
+    const introDesc = document.getElementById('intro-desc');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    function loadLessons(section) {
+      lessonContainer.innerHTML = '';
+      const data = lessonsData[section];
+
+      introTitle.textContent = section.charAt(0).toUpperCase() + section.slice(1) + " Lessons";
+      introDesc.textContent = `Explore ${section} grammar concepts and improve your English step-by-step.`;
+
+      data.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.innerHTML = `
+          <h3>${item.title}</h3>
+          <p>${item.text}</p>
+          <div class="example">${item.example}</div>
+        `;
+        lessonContainer.appendChild(card);
+      });
+    }
+
+    // Click event for sidebar
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        const section = link.dataset.section;
+        loadLessons(section);
+      });
+    });
+
+    // Default load
+    loadLessons("beginner");
+  </script>
+
+</body>
+</html>

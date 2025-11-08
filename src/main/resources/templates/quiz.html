@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar Quiz | FluentNest</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #f4f9ff;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(
+  to top right,
+#7928ca 0%,        
+#4A1780 30%,       
+#7928ca 70%,      
+  #7928ca 100%       
+);
+      color: white;
+      text-align: center;
+      padding: 25px 10px;
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      color:#4A1780 ;
+      margin-bottom: 30px;
+    }
+
+    .question {
+      margin-bottom: 25px;
+    }
+
+    .question h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .options label {
+      display: block;
+      background: #E9D6FA;
+      margin-bottom: 8px;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .options label:hover {
+      background: #E9D6FA;
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    button {
+      background: linear-gradient(#4A1780, #4A1780, #4A1780);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      margin: 5px;
+    }
+
+    button:hover {
+      background: linear-gradient(#4A1780, #4A1780, #4A1780);
+    }
+
+    #result {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #28a745;
+      display: none;
+    }
+
+    footer {
+      background: #7928ca;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+      font-size: 15px;
+    }
+    
+    input[type="radio"] {
+      accent-color: #4A1780; /* change blue to teal */
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+   Grammar Quiz – <span style="background: linear-gradient(to right, #ff0080, rgb(128, 0, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;">FluentNest</span>
+</header>
+
+<div class="container">
+  <h2>Test Your Grammar Skills</h2>
+
+  <form id="quizForm">
+
+    <div class="question">
+      <h3>1️.Which sentence is correct?</h3>
+      <div class="options">
+        <label><input type="radio" name="q1" value="a"> She don’t like apples.</label>
+        <label><input type="radio" name="q1" value="b"> She doesn’t likes apples.</label>
+        <label><input type="radio" name="q1" value="c"> She doesn’t like apples.</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <h3>2️. Choose the correct article:</h3>
+      <div class="options">
+        <label><input type="radio" name="q2" value="a"> He is eating a apple.</label>
+        <label><input type="radio" name="q2" value="b"> He is eating an apple.</label>
+        <label><input type="radio" name="q2" value="c"> He is eating the apple.</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <h3>3. Select the correct preposition:</h3>
+      <div class="options">
+        <label><input type="radio" name="q3" value="a"> She is good in dancing.</label>
+        <label><input type="radio" name="q3" value="b"> She is good on dancing.</label>
+        <label><input type="radio" name="q3" value="c"> She is good at dancing.</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <h3>4️. Choose the correct tense form:</h3>
+      <div class="options">
+        <label><input type="radio" name="q4" value="a"> He has went to school.</label>
+        <label><input type="radio" name="q4" value="b"> He has gone to school.</label>
+        <label><input type="radio" name="q4" value="c"> He gone to school.</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <h3>5️. Which is in passive voice?</h3>
+      <div class="options">
+        <label><input type="radio" name="q5" value="a"> They built a house.</label>
+        <label><input type="radio" name="q5" value="b"> A house was built by them.</label>
+        <label><input type="radio" name="q5" value="c"> They were building a house.</label>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button type="button" onclick="checkAnswers()">Submit Quiz</button>
+      <button type="reset" onclick="resetQuiz()">Try Again</button>
+      <a href="/lesson"><button type="button"> Back to Lessons</button></a>
+      <a href="/main"><button type="button" style="background:linear-gradient(135deg, #4EB5A9, #A4DDD6);">Back to Main </button></a>
+    </div>
+
+  </form>
+
+  <div id="result"></div>
+</div>
+
+<footer>
+  © 2025 FluentNest | Improve Grammar, Vocabulary & Communication
+</footer>
+
+<script>
+  function checkAnswers() {
+    const correctAnswers = { q1: "c", q2: "b", q3: "c", q4: "b", q5: "b" };
+    let score = 0;
+    let total = 5;
+
+    for (let key in correctAnswers) {
+      const answer = document.querySelector(`input[name="${key}"]:checked`);
+      if (answer && answer.value === correctAnswers[key]) score++;
+    }
+
+    const resultDiv = document.getElementById("result");
+    resultDiv.style.display = "block";
+    resultDiv.innerHTML = `🎉 You scored ${score} out of ${total}!`;
+
+    if (score === total) {
+      resultDiv.style.color = "#28a745";
+      resultDiv.innerHTML += "<br>Excellent! You're a grammar pro!";
+    } else if (score >= 3) {
+      resultDiv.style.color = "#ffc107";
+      resultDiv.innerHTML += "<br>Good job! Keep practicing.";
+    } else {
+      resultDiv.style.color = "#dc3545";
+      resultDiv.innerHTML += "<br>Keep learning. You can do better!";
+    }
+  }
+
+  function resetQuiz() {
+    document.getElementById("result").style.display = "none";
+  }
+</script>
+
+</body>
+</html>

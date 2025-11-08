@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(
+  to top right,
+  #4EB5A9 0%,        
+  #0a001a 30%,       
+  #0a001a 70%,      
+   #6157E1 100%       
+); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .login-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #6157E1;;
+            box-shadow: 0 0 5px #6157E1;;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #6157E1;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #6157E1;;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+        .signup-link {
+            margin-top: 15px;
+            display: block;
+            color: #6157E1;;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .signup-link:hover {
+            color: #6157E1;;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login <h2 style="background: linear-gradient(to right, #ff0080, #7928ca);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;">FluentNest</h2></h2>
+        <form th:action="@{/login}" method="post">
+            <input type="text" placeholder="Username" name="username" required />
+            <input type="password" placeholder="Password" name="password" required />
+            <button type="submit">Login</button>
+        </form>
+        <a href="/signup" class="signup-link">Don't have an account? Sign up</a>
+        <div class="error" th:if="${param.error}" th:text="'Invalid username or password'"></div>
+        <div class="error" th:if="${param.logout}" th:text="'You have been logged out successfully'"></div>
+    </div>
+</body>
+</html>

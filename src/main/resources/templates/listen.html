@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listen & Repeat | FluentNest</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #EDE3F8;
+      color: #2E1065;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 750px;
+      margin: 60px auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4A1780;
+    }
+
+    .activity {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn {
+      background: #8E4DD8;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #4A1780;
+      transform: scale(1.05);
+    }
+
+    #result {
+      margin-top: 25px;
+      font-weight: bold;
+      color: #4A1780;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #555;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1> Listen & Repeat</h1>
+    <div class="activity">
+      <p>Click “Listen” to hear the word, then “Speak” to repeat it.</p>
+      <h2 id="word">Confidence</h2>
+      <button class="btn" onclick="playWord()">🔊 Listen</button>
+      <button class="btn" onclick="startRecognition()">🎙️ Speak</button>
+      <p id="result"></p>
+    </div>
+  </div>
+
+  <footer>© 2025 FluentNest — Listen & Repeat</footer>
+
+  <script>
+    const words = ["Confidence", "Fluency", "Professional", "Communication", "Accent"];
+    let index = 0;
+
+    function playWord() {
+      const utter = new SpeechSynthesisUtterance(words[index]);
+      utter.lang = 'en-US';
+      speechSynthesis.speak(utter);
+    }
+
+    function startRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.start();
+
+      recognition.onresult = (event) => {
+        const spoken = event.results[0][0].transcript;
+        document.getElementById("result").innerText = 
+          `You said: "${spoken}"`;
+
+        if (spoken.toLowerCase().includes(words[index].toLowerCase())) {
+          document.getElementById("result").innerText += " ✅ Correct!";
+          index = (index + 1) % words.length;
+          document.getElementById("word").innerText = words[index];
+        } else {
+          document.getElementById("result").innerText += " ❌ Try again!";
+        }
+      };
+    }
+  </script>
+</body>
+</html>

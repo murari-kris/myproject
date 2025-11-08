@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fluency Challenge — Leaderboard</title>
+  <style>
+    :root {
+      --primary: #7f56d9;
+      --secondary: #4eb5a9;
+      --bg: #f8f7ff;
+      --card: #ffffff;
+      --text: #333;
+      --muted: #666;
+      --radius: 14px;
+      --shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 40px 20px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 30px;
+      animation: fadeIn 1s ease;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      animation: fadeIn 1s ease;
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+    }
+
+    th, td {
+      padding: 12px 10px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background: #f2edff;
+      color: var(--primary);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    tr:hover td {
+      background: #f9f6ff;
+    }
+
+    td {
+      font-size: 15px;
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #6b3fd1;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Fluency Leaderboard</h1>
+    <p>See where you rank among other FluentNest challengers!</p>
+  </header>
+
+  <main>
+    <h2>Top Performers</h2>
+    <table id="leaderboard">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Difficulty</th>
+          <th>WPM</th>
+          <th>Words</th>
+          <th>Time (s)</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboardBody">
+        <tr><td colspan="7" class="empty">Loading leaderboard...</td></tr>
+      </tbody>
+    </table>
+
+    <div class="actions">
+      <a th:href="@{/main}" class="btn ghost">Back to Home</a>
+      <a th:href="@{challenge}" class="btn">Start New Challenge</a>
+      <button id="clearScores" class="btn ghost">Clear Leaderboard</button>
+    </div>
+  </main>
+
+  <footer>© 2025 FluentNest • Keep practicing to climb higher 🚀</footer>
+
+ <script th:inline="javascript">
+  const leaderboardBody = document.getElementById('leaderboardBody');
+  const clearBtn = document.getElementById('clearScores');
+
+  function loadLeaderboard() {
+    const key = 'fluent_challenge_scores';
+    const raw = localStorage.getItem(key);
+    const data = raw ? JSON.parse(raw) : [];
+
+    if (!data.length) {
+      leaderboardBody.innerHTML = '<tr><td colspan="7" class="empty">No scores yet. Start your first challenge!</td></tr>';
+      return;
+    }
+
+    leaderboardBody.innerHTML = data
+      .slice(0, 20)
+      .map((entry, i) => `
+        <tr>
+          <td><strong>${i + 1}</strong></td>
+          <td>${entry.name}</td>
+          <td>${entry.difficulty}</td>
+          <td style="color:#4eb5a9;font-weight:600">${entry.wpm}</td>
+          <td>${entry.words}</td>
+          <td>${entry.duration}</td>
+          <td>${new Date(entry.date).toLocaleString()}</td>
+        </tr>
+      `)
+      .join('');
+  }
+
+  clearBtn.addEventListener('click', () => {
+    if (confirm("Are you sure you want to clear all leaderboard scores?")) {
+      localStorage.removeItem('fluent_challenge_scores');
+      loadLeaderboard();
+    }
+  });
+
+  loadLeaderboard();
+</script>
+
+</body>
+</html>

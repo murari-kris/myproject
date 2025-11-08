@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Profile | EngliChat</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        .hidden-file { display: none; }
+    </style>
+</head>
+<body class="bg-light">
+
+<div class="container mt-5" style="max-width:800px; background:#fff; padding:20px; border-radius:10px;">
+    <h2 class="mb-4 text-center">Edit Profile</h2>
+
+    <form th:action="@{/profile/update}" method="post" enctype="multipart/form-data">
+        <div class="text-center mb-3">
+            <label for="imageInput">
+                <img th:if="${profile.profileImage != null}"
+                     th:src="@{${profile.profileImage}}"
+                     alt="Profile Image"
+                     style="width:150px;height:150px;border-radius:50%;" />
+            </label>
+            <input id="imageInput" class="hidden-file" type="file" name="imageFile" accept="image/*" />
+        </div>
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input id="name" type="text" class="form-control" name="name"
+                   th:value="${profile.name}" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="nativeLanguage" class="form-label">Native Language</label>
+            <input id="nativeLanguage" type="text" class="form-control" name="nativeLanguage"
+                   th:value="${profile.nativeLanguage}" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="englishLevel" class="form-label">English Level</label>
+            <select id="englishLevel" class="form-select" name="englishLevel" required>
+                <option value="" disabled th:selected="${profile.englishLevel == null}">Select level</option>
+                <option value="beginner" th:selected="${profile.englishLevel == 'beginner'}">Beginner</option>
+                <option value="intermediate" th:selected="${profile.englishLevel == 'intermediate'}">Intermediate</option>
+                <option value="advanced" th:selected="${profile.englishLevel == 'advanced'}">Advanced</option>
+                <option value="native" th:selected="${profile.englishLevel == 'native'}">Native Speaker</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="practiceLanguages" class="form-label">Languages to Practice</label>
+            <input id="practiceLanguages" type="text" class="form-control" name="practiceLanguages"
+                   th:value="${profile.practiceLanguages}" placeholder="English, Spanish, etc." />
+        </div>
+
+        <div class="mb-3">
+            <label for="profession" class="form-label">Profession / Study</label>
+            <input id="profession" type="text" class="form-control" name="profession"
+                   th:value="${profile.profession}" />
+        </div>
+
+        <div class="mb-3">
+            <label for="favoriteTopics" class="form-label">Favorite Topics</label>
+            <input id="favoriteTopics" type="text" class="form-control" name="favoriteTopics"
+                   th:value="${profile.favoriteTopics}" />
+        </div>
+
+        <div class="mb-3">
+            <label for="goals" class="form-label">Your Goals</label>
+            <textarea id="goals" class="form-control" name="goals" rows="3"
+                      th:text="${profile.goals}"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="availability" class="form-label">Availability</label>
+            <input id="availability" type="text" class="form-control" name="availability"
+                   th:value="${profile.availability}" />
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Save Changes</button>
+    </form>
+</div>
+
+</body>
+</html>

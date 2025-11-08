@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fluency Challenge — Start</title>
+  <style>
+    :root {
+      --primary: #7f56d9;
+      --secondary: #4eb5a9;
+      --bg: #f8f7ff;
+      --card: #ffffff;
+      --text: #333;
+      --muted: #666;
+      --radius: 14px;
+      --shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 40px 20px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 30px;
+      animation: fadeIn 1s ease;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 850px) {
+      main { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    label {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    select, input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      margin-bottom: 14px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+      font-family: inherit;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      text-decoration:none;
+    }
+
+    .btn:hover {
+      background: #6b3fd1;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .prompt-box {
+      background: #f4efff;
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .timer {
+      font-weight: bold;
+      color: var(--secondary);
+    }
+
+    .result {
+      margin-top: 12px;
+      background: #e8f9f6;
+      border-left: 4px solid var(--secondary);
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .link-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Fluency Challenges</h1>
+    <p>Challenge yourself with short speaking prompts and timed fluency games to build confidence.</p>
+  </header>
+
+  <main>
+    <!-- Challenge Area -->
+    <section class="card">
+      <h2>Start Challenge</h2>
+      <label for="difficulty">Difficulty</label>
+      <select id="difficulty">
+        <option value="easy">Beginner (short)</option>
+        <option value="medium">Intermediate</option>
+        <option value="hard">Advanced (long)</option>
+      </select>
+
+      <label for="duration">Duration (seconds)</label>
+      <input id="duration" type="number" min="15" max="300" step="15" value="60">
+
+      <button id="newPrompt" class="btn ghost">New Prompt</button>
+
+      <div class="prompt-box">
+        <div id="promptText">Click “New Prompt” or start the challenge!</div>
+      </div>
+
+      <div>
+        <button id="startBtn" class="btn">Start Challenge</button>
+        <button id="submitBtn" class="btn ghost" disabled>Submit Early</button>
+        <span class="timer" id="timeLeft">--</span> sec left
+      </div>
+
+      <label for="response">Your Response</label>
+      <textarea id="response" placeholder="Type or summarize your spoken answer..." disabled></textarea>
+
+      <div id="resultArea" style="display:none" class="result"></div>
+    </section>
+
+    <!-- Info & Leaderboard -->
+    <aside class="card">
+      <h2>How It Works</h2>
+      <p style="font-size:14px;color:var(--muted)">Choose difficulty → Start timer → Speak aloud while typing a summary. When time’s up, your WPM is calculated.</p>
+
+      <hr style="margin:15px 0;border:none;border-top:1px solid #eee;">
+
+      <h2>Save Score</h2>
+      <input id="playerName" placeholder="Enter your name to save score">
+      <div class="link-row">
+        <button id="saveScore" class="btn ghost" disabled>Save to Leaderboard</button>
+        <a th:href="@{/leaderboard}" class="btn">View Leaderboard</a>
+        <a th:href="@{/main}" class="btn ghost">Back to Home</a>
+      </div>
+    </aside>
+  </main>
+
+  <footer>© 2025 FluentNest • Speak confidently every day 🌱</footer>
+
+  <script th:inline="javascript">
+  // Prompts dataset
+  const prompts = {
+    easy: [
+      "Introduce yourself in 30 seconds.",
+      "Describe your favourite food.",
+      "Talk about your morning routine."
+    ],
+    medium: [
+      "Explain why teamwork is important at work.",
+      "Describe a problem you solved recently and the steps you took.",
+      "Discuss the advantages of learning online."
+    ],
+    hard: [
+      "Argue for or against the idea that universities should be free for all citizens.",
+      "Describe a complex project you managed and how you measured success.",
+      "Discuss the long-term effects of AI on employment and education."
+    ]
+  };
+
+  const difficultyEl = document.getElementById('difficulty');
+  const durationEl = document.getElementById('duration');
+  const newPromptBtn = document.getElementById('newPrompt');
+  const promptTextEl = document.getElementById('promptText');
+  const startBtn = document.getElementById('startBtn');
+  const submitBtn = document.getElementById('submitBtn');
+  const responseEl = document.getElementById('response');
+  const timeLeftEl = document.getElementById('timeLeft');
+  const resultArea = document.getElementById('resultArea');
+  const playerNameEl = document.getElementById('playerName');
+  const saveBtn = document.getElementById('saveScore');
+
+  let currentPrompt = "";
+  let timer = null;
+  let timeRemaining = 0;
+  let started = false;
+  let lastScore = null;
+
+  function choosePrompt() {
+    const diff = difficultyEl.value;
+    const list = prompts[diff] || prompts.easy;
+    currentPrompt = list[Math.floor(Math.random() * list.length)];
+    promptTextEl.textContent = currentPrompt;
+  }
+
+  newPromptBtn.addEventListener('click', choosePrompt);
+
+  startBtn.addEventListener('click', () => {
+    if (started) return;
+    if (!currentPrompt) choosePrompt();
+    const duration = Math.max(15, Math.min(300, parseInt(durationEl.value) || 60));
+    timeRemaining = duration;
+    timeLeftEl.textContent = timeRemaining;
+    responseEl.disabled = false;
+    responseEl.value = "";
+    responseEl.focus();
+    startBtn.disabled = true;
+    submitBtn.disabled = false;
+    saveBtn.disabled = true;
+    resultArea.style.display = 'none';
+    started = true;
+
+    timer = setInterval(() => {
+      timeRemaining--;
+      timeLeftEl.textContent = timeRemaining;
+      if (timeRemaining <= 0) finishChallenge();
+    }, 1000);
+  });
+
+  submitBtn.addEventListener('click', () => {
+    if (started) finishChallenge();
+  });
+
+  function finishChallenge() {
+    started = false;
+    clearInterval(timer);
+    startBtn.disabled = false;
+    submitBtn.disabled = true;
+    responseEl.disabled = true;
+
+    const text = (responseEl.value || "").trim();
+    const words = text ? text.split(/\s+/).filter(Boolean).length : 0;
+    const durationSet = parseInt(durationEl.value) || 60;
+    const elapsed = durationSet - Math.max(0, timeRemaining);
+    const timeUsed = elapsed > 0 ? elapsed : durationSet;
+    const wpm = Math.round(words / (timeUsed / 60));
+
+    lastScore = {
+      name: playerNameEl.value.trim() || "Anonymous",
+      wpm,
+      words,
+      duration: timeUsed,
+      prompt: currentPrompt,
+      difficulty: difficultyEl.value,
+      date: new Date().toISOString()
+    };
+
+    resultArea.style.display = 'block';
+    resultArea.innerHTML = `
+      <strong>✅ Result:</strong><br>
+      Words typed: <strong>${words}</strong><br>
+      Time used: <strong>${timeUsed}s</strong><br>
+      WPM: <strong>${wpm}</strong>
+    `;
+    saveBtn.disabled = false;
+  }
+
+  saveBtn.addEventListener('click', () => {
+    if (!lastScore) return;
+
+    const key = 'fluent_challenge_scores';
+    const scores = JSON.parse(localStorage.getItem(key) || '[]');
+
+    scores.push(lastScore);
+    scores.sort((a, b) => b.wpm - a.wpm);
+
+    localStorage.setItem(key, JSON.stringify(scores));
+
+    alert('✅ Score saved successfully! Redirecting to Leaderboard...');
+    saveBtn.disabled = true;
+
+    // ✅ Redirect using Thymeleaf
+    setTimeout(() => {
+      window.location.href = /*[[ @{/leaderboard} ]]*/ '/leaderboard';
+    }, 800);
+  });
+</script>
+
+</body>
+</html>

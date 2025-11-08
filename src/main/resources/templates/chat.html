@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Chat</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+ 
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+</head>
+<body class="container mt-4">
+  <h3>Chat with <span id="chatWith" th:text="${chatWith}"></span></h3>
+
+  <div id="messages" class="border p-3 mb-3" style="height: 400px; overflow-y: auto;">
+    <div th:each="msg : ${messages}">
+      <div th:if="${msg.sender == #authentication.name}" class="text-end mb-2">
+        <span class="badge bg-primary" th:text="${msg.content}"></span>
+      </div>
+      <div th:if="${msg.sender != #authentication.name}" class="text-start mb-2">
+        <span class="badge bg-secondary" th:text="${msg.content}"></span>
+      </div>
+    </div>
+  </div>
+
+  <form id="sendForm" class="d-flex">
+    <input type="text" id="messageInput" class="form-control me-2" placeholder="Type a message..." required>
+    <button type="submit" class="btn btn-success" style=" background: linear-gradient(#4A1780, #4A1780, #4A1780);">Send</button>
+  </form>
+
+  <!-- Hidden info for JS -->
+  <input type="hidden" id="me" th:value="${#authentication.name}">
+  <input type="hidden" id="peer" th:value="${chatWith}">
+
+<script>
+  let stompClient = null;
+
+  function connectWs() {
+    const socket = new SockJS('/chat-websocket');   // ✅ must match WebSocketConfig
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        console.log("✅ Connected: " + frame);
+
+        stompClient.subscribe('/user/queue/messages', function (msg) {
+            console.log("📥 Received: ", msg.body);
+            let message = JSON.parse(msg.body);
+            appendMessage(message);
+        });
+    });
+  }
+
+  function appendMessage(msg) {
+    const me = document.getElementById('me').value;
+    const box = document.getElementById('messages');
+    const wrap = document.createElement('div');
+    wrap.className = (msg.sender === me) ? 'text-end mb-2' : 'text-start mb-2';
+
+    const badge = document.createElement('span');
+    badge.className = (msg.sender === me) ? 'badge bg-primary' : 'badge bg-secondary';
+    badge.textContent = msg.content;
+
+    wrap.appendChild(badge);
+    box.appendChild(wrap);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  document.getElementById('sendForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const me   = document.getElementById('me').value;
+    const peer = document.getElementById('peer').value;
+    const text = document.getElementById('messageInput').value.trim();
+    if (!text || !stompClient || !stompClient.connected) return;
+
+    stompClient.send('/app/chat.private', {}, JSON.stringify({
+      sender: me,
+      receiver: peer,
+      content: text
+    }));
+
+    document.getElementById('messageInput').value = '';
+  });
+
+  connectWs();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Improve Vocabulary | FluentNest</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f8fb;
+      color: #333;
+    }
+
+    header {
+       background: linear-gradient(
+  to top right,
+#7928ca 0%,        
+#7928ca 30%,       
+#7928ca  70%,      
+ #4A1780  100%       
+);
+      color: white;
+      text-align: center;
+      padding: 5px 10px;
+    }
+    
+
+    
+    
+    
+
+    header h1 {
+      font-size: 36px;
+      margin-top: 2rem;
+    }
+
+    header p {
+      font-size: 18px;
+      margin-top: 10px;
+      color: #eaf6ff;
+    }
+   
+     .nav {
+       background: linear-gradient(
+  to top right,
+ #4A1780   0%,        
+ #7928ca  30%,       
+#7928ca 70%,      
+  #7928ca 100%       
+);
+      color: white;
+      text-align: center;
+      padding: 5px 10px;
+      
+      display:flex;
+     
+      
+    }
+    
+ 
+    
+    .nav a{
+   display: inline-block;       /* allows padding and hover effect */
+  padding: 5px 10px;           /* small but clean spacing */
+  background-color: #ffff;   /* teal background */
+  color:#7928ca;                /* white text */
+  text-decoration: none;       /* removes underline */
+  border-radius: 5px;          /* smooth corners */
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+
+    text-decoration: none;
+      
+     
+      
+    }
+    
+    .nav a:hover {
+  background-color:  #4A1780 ;   /* slightly darker teal on hover */
+}
+    
+
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    section h2 {
+      text-align: center;
+      color: #4A1780;
+      font-size: 26px;
+      margin-bottom: 25px;
+    }
+
+    .flashcards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    .word {
+      font-size: 20px;
+      color:#7928ca ;
+      font-weight: 600;
+    }
+
+    .meaning {
+      margin: 8px 0;
+      color: #333;
+      font-size: 16px;
+    }
+
+    .example {
+      font-style: italic;
+      color: #555;
+      font-size: 15px;
+    }
+
+    footer {
+      background: #7928ca;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Improve Your Vocabulary</h1>
+    <p>Learn topic-based vocabulary with examples to improve your English fluency!</p>
+    
+  </header>
+  
+  <div class="nav">
+  
+      <a href="/main">← Home</a>
+     </div>
+
+  <div class="container">
+
+    <!-- 1️⃣ Daily Use Vocabulary -->
+    <section>
+      <h2>Daily Use Vocabulary</h2>
+      <div class="flashcards">
+        <div class="card"><p class="word">Polite</p><p class="meaning">Showing good manners.</p><p class="example">Always be polite to your elders.</p></div>
+        <div class="card"><p class="word">Delicious</p><p class="meaning">Having a pleasant taste.</p><p class="example">The food smells delicious!</p></div>
+        <div class="card"><p class="word">Hurry</p><p class="meaning">To move or act with speed.</p><p class="example">I was in a hurry to reach school.</p></div>
+        <div class="card"><p class="word">Borrow</p><p class="meaning">To take something for a short time.</p><p class="example">Can I borrow your umbrella?</p></div>
+        <div class="card"><p class="word">Neighbor</p><p class="meaning">A person living nearby.</p><p class="example">Our neighbor invited us to dinner.</p></div>
+        <div class="card"><p class="word">Decide</p><p class="meaning">To make a choice after thinking.</p><p class="example">I can’t decide which movie to watch.</p></div>
+      </div>
+    </section>
+
+    <!-- 2️⃣ Medical Related Vocabulary -->
+    <section>
+      <h2> Medical Related Vocabulary</h2>
+      <div class="flashcards">
+        <div class="card"><p class="word">Prescription</p><p class="meaning">A doctor's written order for medicine.</p><p class="example">The doctor gave me a prescription.</p></div>
+        <div class="card"><p class="word">Symptom</p><p class="meaning">A sign of a disease.</p><p class="example">Coughing is a symptom of cold.</p></div>
+        <div class="card"><p class="word">Diagnosis</p><p class="meaning">Finding out what illness someone has.</p><p class="example">The diagnosis confirmed malaria.</p></div>
+        <div class="card"><p class="word">Surgery</p><p class="meaning">A medical operation.</p><p class="example">He had knee surgery last week.</p></div>
+        <div class="card"><p class="word">Injection</p><p class="meaning">A shot of medicine given through a needle.</p><p class="example">He got an injection for pain relief.</p></div>
+        <div class="card"><p class="word">Recovery</p><p class="meaning">A return to health.</p><p class="example">She made a fast recovery after the flu.</p></div>
+      </div>
+    </section>
+
+    <!-- 3️⃣ Office Related Vocabulary -->
+    <section>
+      <h2>Office Related Vocabulary</h2>
+      <div class="flashcards">
+        <div class="card"><p class="word">Deadline</p><p class="meaning">A time limit for finishing work.</p><p class="example">We must meet the project deadline.</p></div>
+        <div class="card"><p class="word">Colleague</p><p class="meaning">A person you work with.</p><p class="example">My colleague helped with my report.</p></div>
+        <div class="card"><p class="word">Promotion</p><p class="meaning">Advancement to a higher position.</p><p class="example">He got a promotion last month.</p></div>
+        <div class="card"><p class="word">Meeting</p><p class="meaning">A gathering for discussion.</p><p class="example">We have a team meeting every Monday.</p></div>
+        <div class="card"><p class="word">Agenda</p><p class="meaning">A list of topics to discuss.</p><p class="example">Budget review is on today's agenda.</p></div>
+        <div class="card"><p class="word">Presentation</p><p class="meaning">A talk to share information.</p><p class="example">Her presentation was excellent.</p></div>
+      </div>
+    </section>
+
+    <!-- 4️⃣ Travel Related Vocabulary -->
+    <section>
+      <h2> Travel Related Vocabulary</h2>
+      <div class="flashcards">
+        <div class="card"><p class="word">Destination</p><p class="meaning">The place you are going to.</p><p class="example">Paris is my dream destination.</p></div>
+        <div class="card"><p class="word">Luggage</p><p class="meaning">Bags used for traveling.</p><p class="example">Keep your luggage near you.</p></div>
+        <div class="card"><p class="word">Passport</p><p class="meaning">An official document for travel.</p><p class="example">Don’t forget to bring your passport.</p></div>
+        <div class="card"><p class="word">Boarding Pass</p><p class="meaning">A ticket that lets you board a flight.</p><p class="example">Show your boarding pass at the gate.</p></div>
+        <div class="card"><p class="word">Tourist</p><p class="meaning">A person traveling for pleasure.</p><p class="example">The city was full of tourists.</p></div>
+        <div class="card"><p class="word">Journey</p><p class="meaning">The act of traveling from one place to another.</p><p class="example">Our journey was long but enjoyable.</p></div>
+      </div>
+    </section>
+
+    <!-- 5️⃣ Education Related Vocabulary -->
+    <section>
+      <h2> Education Related Vocabulary</h2>
+      <div class="flashcards">
+        <div class="card"><p class="word">Assignment</p><p class="meaning">Work given to students.</p><p class="example">I completed my English assignment.</p></div>
+        <div class="card"><p class="word">Lecture</p><p class="meaning">A talk given by a teacher.</p><p class="example">Today's lecture was about grammar.</p></div>
+        <div class="card"><p class="word">Scholarship</p><p class="meaning">Money given for studying.</p><p class="example">She received a scholarship for college.</p></div>
+        <div class="card"><p class="word">Exam</p><p class="meaning">A test of knowledge.</p><p class="example">The math exam was difficult.</p></div>
+        <div class="card"><p class="word">Notebook</p><p class="meaning">A book for writing notes.</p><p class="example">I wrote all my lessons in the notebook.</p></div>
+        <div class="card"><p class="word">Teacher</p><p class="meaning">A person who helps others learn.</p><p class="example">Our teacher explained the topic clearly.</p></div>
+      </div>
+    </section>
+
+    <!-- 6️⃣ Emotional & Personality Vocabulary -->
+    <section>
+      <h2> Emotional & Personality Vocabulary</h2>
+      <div class="flashcards">
+        <div class="card"><p class="word">Confident</p><p class="meaning">Sure of oneself.</p><p class="example">She is confident about her skills.</p></div>
+        <div class="card"><p class="word">Honest</p><p class="meaning">Truthful and sincere.</p><p class="example">He is an honest employee.</p></div>
+        <div class="card"><p class="word">Generous</p><p class="meaning">Willing to give or share.</p><p class="example">My friend is very generous.</p></div>
+        <div class="card"><p class="word">Curious</p><p class="meaning">Eager to know or learn something.</p><p class="example">Children are naturally curious.</p></div>
+        <div class="card"><p class="word">Calm</p><p class="meaning">Not easily upset or excited.</p><p class="example">He remained calm during the storm.</p></div>
+        <div class="card"><p class="word">Grateful</p><p class="meaning">Thankful and appreciative.</p><p class="example">I’m grateful for your help.</p></div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>© 2025 FluentNest | Expand your vocabulary every day</p>
+  </footer>
+
+</body>
+</html>

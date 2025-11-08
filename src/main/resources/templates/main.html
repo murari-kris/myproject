@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FluentNest - Learning Hub</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+     background: linear-gradient(
+  to bottom right,
+  #4EB5A9 0%,        
+  #0a001a 30%,       
+  #0a001a 70%,      
+   #6157E1 100%       
+);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2d2d8a;
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+
+    .sections {
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+    }
+
+    .section {
+      background: #fff;
+      border-radius: 15px;
+      padding: 40px 30px;
+      min-height: 200px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .section:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+
+    .section h2 {
+      color: #2d2d8a;
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+
+    .section p {
+      font-size: 16px;
+      margin-bottom: 25px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #fff;
+      margin-right: 8px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+
+    .blue { background-color: #3b82f6; }
+    .green { background-color: #10b981; }
+    .yellow { background-color: #f59e0b; }
+    .purple { background-color: #8b5cf6; }
+    .red { background-color: #ef4444; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      color: #fff;
+      font-size: 14px;
+      border-top: 1px solid #eee;
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        min-height: 300px;
+        padding: 30px 20px;
+      }
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><span style="background: linear-gradient(to right, #ff0080, rgb(128, 0, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;">FluentNest</span> Learning Hub</h1>
+    <div class="sections">
+
+      <!-- Grammar -->
+      <div class="section">
+        <h2>Improve Grammar</h2>
+        <p>Strengthen your grammar foundation with easy-to-follow lessons, exercises, and quizzes that help you write and speak confidently.</p>
+        <div class="buttons">
+          <a th:href="@{/lesson}" class="btn purple">Start Lesson</a>
+          <a th:href="@{/quiz}" class="btn green">Take Quiz</a>
+        </div>
+      </div>
+
+      <!-- Vocabulary -->
+      <div class="section">
+        <h2>Improve Vocabulary & Job Interview Prep</h2>
+        <p>Enhance your vocabulary with daily-use words and prepare for corporate interviews with topic-wise exercises and GD practice.</p>
+        <div class="buttons">
+          <a th:href="@{/vocabulary}" class="btn green">Learn Vocabulary</a>
+          <a th:href="@{/interview}" class="btn purple">Mock Interview</a>
+        </div>
+      </div>
+
+      <!-- Co-Learner Practice -->
+      <div class="section">
+        <h2>Practice with Your Co-Learner</h2>
+        <p>Connect with learners around the world through live audio and video sessions to improve your speaking fluency and confidence.</p>
+        <div class="buttons">
+          <a href="#" class="btn blue">Join Video</a>
+          <a href="#" class="btn yellow">Join Audio</a>
+        </div>
+      </div>
+
+      <!-- Daily Conversation -->
+      <div class="section">
+        <h2>Daily Conversation Practice</h2>
+        <p>Learn how to handle daily conversations at home, office, or public places. Practice common dialogues and real-world situations.</p>
+        <div class="buttons">
+          <a th:href="@{/conversation}" class="btn purple">Start Conversation</a>
+          <a th:href="@{/examples}" class="btn blue">View Examples</a>
+        </div>
+      </div>
+
+      <!-- Fluency Challenges -->
+      <div class="section">
+        <h2>Fluency Challenges</h2>
+        <p>Challenge yourself with short speaking prompts and timed fluency games. Build confidence to speak English without hesitation.</p>
+        <div class="buttons">
+          <a th:href="@{/challenge}" class="btn red">Start Challenge</a>
+          <a th:href="@{/leaderboard}" class="btn green">View Leaderboard</a>
+        </div>
+      </div>
+
+      <!-- English for Professionals -->
+      <div class="section">
+        <h2> English for Professionals</h2>
+        <p>Learn how to speak professionally during meetings, client calls, and interviews. Develop business communication etiquette.</p>
+        <div class="buttons">
+          <a th:href="@{/start}" class="btn blue">Start Lesson</a>
+          
+        </div>
+      </div>
+
+      <!-- Pronunciation -->
+      <div class="section">
+        <h2>Pronunciation Practice</h2>
+        <p>Master pronunciation through phonetic exercises and audio-based training sessions. Practice speaking with native-like clarity.</p>
+        <div class="buttons">
+          <a th:href="@{/pronunciation}" class="btn purple">Practice Words</a>
+          <a th:href="@{/listen}" class="btn yellow">Listen & Repeat</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    © 2025 FluentNest | Learn, Practice, and Grow Together 
+  </footer>
+</body>
+</html>

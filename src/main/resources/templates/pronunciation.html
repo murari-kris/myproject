@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pronunciation Practice | FluentNest</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #EDE3F8; /* light lavender background */
+      color: #2E1065;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 60px auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4A1780;
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      text-align: justify;
+      line-height: 1.6;
+      margin: 20px 0;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      background: #8E4DD8;
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 30px;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #4A1780;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #555;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pronunciation Practice</h1>
+    <p>
+      Master pronunciation through engaging phonetic exercises and audio-based training sessions. 
+      Practice speaking with native-like clarity and improve your accent naturally.
+    </p>
+
+    <div class="btn-container">
+     <a th:href="@{/words}" class="btn">Practice Words</a>
+      <a th:href="@{/listen}" class="btn">Listen & Repeat</a>
+    </div>
+  </div>
+
+  <footer>© 2025 FluentNest — Pronunciation Practice</footer>
+
+  <script th:inline="javascript">
+    document.getElementById("practiceBtn").addEventListener("click", function (e) {
+      e.preventDefault();
+      window.location.href = /*[[ @{/practice-words} ]]*/ '/practice-words';
+    });
+
+    document.getElementById("listenBtn").addEventListener("click", function (e) {
+      e.preventDefault();
+      window.location.href = /*[[ @{/listen-repeat} ]]*/ '/listen-repeat';
+    });
+  </script>
+</body>
+</html>
